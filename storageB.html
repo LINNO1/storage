@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1>同域下，监听到stroageA.html的window.stroage的变化</h1>
+
+	<script type="text/javascript">
+		window.addEventListener('storage',function(e){
+    		var c=e.key+' change,oldValue: '+e.oldValue+' newValue:'+e.newValue;
+    		alert(c)
+    	})
+    	
+	</script>
+
+</body>
+</html>

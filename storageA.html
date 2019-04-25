@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>测试storage</title>
+	<style type="text/css">
+		.ct {
+			width: 600px;
+			margin: 0 auto;
+			border: 1px solid #ccc;
+			text-align: center;
+		}
+		.btnList {
+			text-align: center;
+		}
+		textarea.content {
+			display: block;
+			width: 500px;
+			height: 400px;
+			margin: 10px auto;
+			
+		}
+	</style>
+</head>
+<body>
+	<div class="ct">
+		<label>键名</label><input type="text" name="itemKey">
+    	<label>键值</label><input type="text" name="itemVal">
+    	<div class='btnList'>
+    		<button class='storageSet'>存入</button>
+    	    <button class='storageGet'>查询</button>
+    	    <button class='storageAll'>查询全部</button>
+    	    <button class='storageClear'>删除全部</button>
+
+    	</div>
+    	
+    	<textarea class='content'></textarea>
+
+
+	</div>
+    
+    <script type="text/javascript">
+    	
+    	document.querySelector('.storageSet').addEventListener('click',function(e){
+    		var keyy=document.querySelector('input[name="itemKey"]').value;
+    		var val=document.querySelector('input[name="itemVal"]').value;
+    		window.localStorage.setItem(keyy,val);
+    	})
+    	document.querySelector('.storageGet').addEventListener('click',function(e){
+    		var keyy=document.querySelector('input[name="itemKey"]').value;    		
+    		var val=window.localStorage.getItem(keyy);
+    		document.querySelector('.content').value=keyy+' : '+val;
+    	})
+    	document.querySelector('.storageAll').addEventListener('click',function(e){
+    		var data='';
+    		for(var i=0;i<window.localStorage.length;i++){   			  
+    			  var keyy=window.localStorage.key(i);
+    			  var val=window.localStorage[keyy];
+    			  data+=keyy+' : '+val + '\n';
+
+    		}   	
+    		 document.querySelector('.content').value=data;	
+    	})
+    	document.querySelector('.storageClear').addEventListener('click',function(e){
+    		window.localStorage.clear();
+    		alert('Done!'); 		
+    	})
+
+//监听不到本页面storage的变化
+    	window.addEventListener('storage',function(e){
+    		var c=e.key+' change,oldValue: '+e.oldValue+' newValue:'+e.newValue;
+    		alert(c)
+    	})
+    	
+    </script>
+</body>
+</html>
